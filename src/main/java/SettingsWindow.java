@@ -67,7 +67,7 @@ public class SettingsWindow  implements Configurable {
         instance.setValue("key_stocks_sina",checkboxSina.isSelected());
         instance.setValue("key_close_log",checkboxLog.isSelected());
         StockWindow.apply();
-        FundWindow.apply();
-        CoinWindow.apply();
+        //FundWindow.apply();
+        //CoinWindow.apply();
     }
 }

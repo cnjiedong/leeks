@@ -45,15 +45,15 @@ public class FundWindow implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(mPanel, "Fund", false);
+        //Content content = contentFactory.createContent(mPanel, "Fund", false);
         //股票
         Content content_stock = contentFactory.createContent(stockWindow.getmPanel(), "Stock", false);
         //虚拟货币
-        Content content_coin = contentFactory.createContent(coinWindow.getmPanel(), "Coin", false);
+        //Content content_coin = contentFactory.createContent(coinWindow.getmPanel(), "Coin", false);
         ContentManager contentManager = toolWindow.getContentManager();
-        contentManager.addContent(content);
+        //contentManager.addContent(content);
         contentManager.addContent(content_stock);
-        contentManager.addContent(content_coin);
+        //contentManager.addContent(content_coin);
         if (StringUtils.isEmpty(PropertiesComponent.getInstance().getValue("key_funds"))) {
             // 没有配置基金数据，选择展示股票
             contentManager.setSelectedContent(content_stock);
@@ -158,7 +158,7 @@ public class FundWindow implements ToolWindowFactory {
         toolbarDecorator.getActionsPanel().add(refreshTimeLabel, BorderLayout.EAST);
         toolPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
         mPanel.add(toolPanel, BorderLayout.CENTER);
-        apply();
+        //apply();
     }
 
     private static List<String> loadFunds() {

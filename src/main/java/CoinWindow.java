@@ -81,7 +81,7 @@ public class CoinWindow {
         toolPanel.setBorder(new EmptyBorder(0,0,0,0));
         mPanel.add(toolPanel, BorderLayout.CENTER);
         // 非主要tab，需要创建，创建时立即应用数据
-        apply();
+       // apply();
     }
 
 

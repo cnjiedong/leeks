@@ -13,10 +13,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
-import java.util.Vector;
 
 public abstract class StockRefreshHandler extends DefaultTableModel {
     private static String[] columnNames;
@@ -26,15 +24,29 @@ public abstract class StockRefreshHandler extends DefaultTableModel {
 
     static {
         PropertiesComponent instance = PropertiesComponent.getInstance();
-        if (instance.getValue(WindowUtils.STOCK_TABLE_HEADER_KEY) == null) {
+        //if (instance.getValue(WindowUtils.STOCK_TABLE_HEADER_KEY) == null) {
             instance.setValue(WindowUtils.STOCK_TABLE_HEADER_KEY, WindowUtils.STOCK_TABLE_HEADER_VALUE);
-        }
+        //}
+
 
         String[] configStr = Objects.requireNonNull(instance.getValue(WindowUtils.STOCK_TABLE_HEADER_KEY)).split(",");
         columnNames = new String[configStr.length];
         for (int i = 0; i < configStr.length; i++) {
             columnNames[i] = WindowUtils.remapPinYin(configStr[i]);
         }
+
+        /*String value = PropertiesComponent.getInstance().getValue("key_stocks");
+        String[] codes = value.split("[,，]");
+        columnNames = new String[codes.length*2];
+        int colIndex = 0;
+        for (int i = 0; i < codes.length; i++) {
+            colIndex=2*i;
+            columnNames[colIndex] = codes[i].toLowerCase();
+            columnNames[colIndex] = columnNames[colIndex].replace("sz","");
+            columnNames[colIndex] = columnNames[colIndex].replace("sh","");
+            columnNames[colIndex+1] = columnNames[colIndex];
+        }*/
+
     }
 
     /**
@@ -140,10 +152,10 @@ public abstract class StockRefreshHandler extends DefaultTableModel {
                 return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             }
         };
-        int columnIndex1 = WindowUtils.getColumnIndexByName(columnNames, "涨跌");
-        int columnIndex2 = WindowUtils.getColumnIndexByName(columnNames, "涨跌幅");
-        table.getColumn(getColumnName(columnIndex1)).setCellRenderer(cellRenderer);
-        table.getColumn(getColumnName(columnIndex2)).setCellRenderer(cellRenderer);
+        //int columnIndex1 = WindowUtils.getColumnIndexByName(columnNames, "涨跌");
+        //int columnIndex2 = WindowUtils.getColumnIndexByName(columnNames, "涨跌幅");
+        //table.getColumn(getColumnName(columnIndex1)).setCellRenderer(cellRenderer);
+        //table.getColumn(getColumnName(columnIndex2)).setCellRenderer(cellRenderer);
     }
 
     protected void updateData(StockBean bean) {
@@ -230,4 +242,6 @@ public abstract class StockRefreshHandler extends DefaultTableModel {
     public void setThreadSleepTime(int threadSleepTime) {
         this.threadSleepTime = threadSleepTime;
     }
+
+
 }
