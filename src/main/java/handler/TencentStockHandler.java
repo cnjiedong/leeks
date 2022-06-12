@@ -11,6 +11,7 @@ import utils.WindowUtils;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -68,15 +69,15 @@ public class TencentStockHandler extends StockRefreshHandler {
     }
 
     private void stepAction() {
-//        Date now = new Date();
-//        if ( now.getHours() < 9 || now.getHours() > 16){//九点到下午4点才更新数据
-//            try {
-//                Thread.sleep(60 * 1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            return;
-//        }
+        Date now = new Date();
+        /*if ( now.getHours() < 9 || now.getHours() > 16){//九点到下午4点才更新数据
+            try {
+                Thread.sleep(60 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return;
+        }*/
         if (StringUtils.isEmpty(urlPara)){
             return;
         }
@@ -150,6 +151,9 @@ public class TencentStockHandler extends StockRefreshHandler {
     protected void updateAllData(List<StockBean> inBeanList) {
         if(CollectionUtils.isEmpty(inBeanList)){
             return;
+        }
+        if(dataVector.size()<=0){
+            fireTableInit = false;
         }
         dataVector.clear();
         String[] col1 = WindowUtils.STOCK_TABLE_LIST1.split(",");

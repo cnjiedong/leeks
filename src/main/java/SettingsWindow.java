@@ -3,6 +3,7 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
+import utils.LogUtil;
 
 import javax.swing.*;
 
@@ -25,7 +26,7 @@ public class SettingsWindow  implements Configurable {
 
     @Override
     public @Nls(capitalization = Nls.Capitalization.Title) String getDisplayName() {
-        return "Leeks";
+        return "stdlog";
     }
 
     @Override
@@ -66,7 +67,13 @@ public class SettingsWindow  implements Configurable {
         instance.setValue("key_table_striped", checkBoxTableStriped.isSelected());
         instance.setValue("key_stocks_sina",checkboxSina.isSelected());
         instance.setValue("key_close_log",checkboxLog.isSelected());
-        StockWindow.apply();
+        try {
+            LogUtil.info("StockWindow.apply begin");
+            StockWindow.apply();
+        }catch (Exception e){
+            LogUtil.info("StockWindow.apply异常");
+            e.printStackTrace();
+        }
         //FundWindow.apply();
         //CoinWindow.apply();
     }

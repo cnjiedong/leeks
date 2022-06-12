@@ -160,7 +160,7 @@ public class StockWindow {
             handler.setThreadSleepTime(instance.getInt("key_stocks_thread_time", handler.getThreadSleepTime()));
             handler.refreshColorful(instance.getBoolean("key_colorful"));
             handler.clearRow();
-            handler.setupTable(loadStocks());
+            //handler.setupTable(loadStocks());
             handler.handle(loadStocks());
         }
     }
